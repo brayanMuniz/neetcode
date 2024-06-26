@@ -8,7 +8,7 @@ import (
 type IntHeap []int
 
 func (h IntHeap) Len() int           { return len(h) }
-func (h IntHeap) Less(i, j int) bool { return h[i] > h[j] }
+func (h IntHeap) Less(i, j int) bool { return h[i] > h[j] } // use > to have more than
 func (h IntHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
 
 func (h *IntHeap) Push(x any) {
@@ -30,11 +30,12 @@ func lastStoneWeight(stones []int) int {
 	heap.Init(&h)
 
 	for h.Len() > 1 {
+
 		// Extract 2 largest stones
 		first := heap.Pop(&h).(int)
 		second := heap.Pop(&h).(int)
 
-		// if they are not equal, get the absolute diffirence and add back to the heap
+		// if they are not equal, add back the diffirence
 		if first != second {
 			heap.Push(&h, first-second)
 		}
